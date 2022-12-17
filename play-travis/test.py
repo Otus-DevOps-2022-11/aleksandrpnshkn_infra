@@ -1,6 +1,7 @@
 import unittest
 
 # test commit
+# second test commit
 class NumbersTest(unittest.TestCase):
 
     def test_equal(self):
