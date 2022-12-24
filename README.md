@@ -14,3 +14,9 @@ Host someinternalhost
 	User aleksandrkrzhn
 	ProxyJump aleksandrkrzhn@158.160.38.94
 ```
+
+## Серверы
+```
+bastion_IP = 35.198.167.169
+someinternalhost_IP = 10.156.0.3
+```
