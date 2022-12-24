@@ -17,6 +17,6 @@ Host someinternalhost
 
 ## Серверы
 ```
-bastion_IP = 35.198.167.169
-someinternalhost_IP = 10.156.0.3
+bastion_IP = 158.160.38.94
+someinternalhost_IP = 10.128.0.15
 ```
