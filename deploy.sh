@@ -9,8 +9,6 @@ set -u
 # Показывать команды
 set -x
 
-cd /home/yc-user
-
 echo 'Копируем код приложения...'
 git clone -b monolith https://github.com/express42/reddit.git
 
