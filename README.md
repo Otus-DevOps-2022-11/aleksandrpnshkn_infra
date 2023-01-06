@@ -15,8 +15,14 @@ Host someinternalhost
 	ProxyJump aleksandrkrzhn@158.160.38.94
 ```
 
-## Серверы
+## bastion
 ```
 bastion_IP = 158.160.38.94
 someinternalhost_IP = 10.128.0.15
+```
+
+## reddit-app
+```
+testapp_IP = 51.250.2.254
+testapp_port = 9292
 ```
