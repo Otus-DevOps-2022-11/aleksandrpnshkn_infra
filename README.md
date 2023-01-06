@@ -17,7 +17,7 @@ Host someinternalhost
 
 ## bastion
 ```
-bastion_IP = 51.250.2.254
+bastion_IP = 158.160.38.94
 someinternalhost_IP = 10.128.0.15
 ```
 
