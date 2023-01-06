@@ -28,6 +28,9 @@ if [[ -e /usr/bin/systemctl ]]; then
     sudo systemctl start mongod
     echo 'Добавляем в автозапуск...'
     sudo systemctl enable mongod
+else
+    echo 'systemd не используется. Запускаем MongoDB вручную...'
+    /usr/bin/mongod --fork --config /etc/mongod.conf
 fi
 
 echo 'Готово'
