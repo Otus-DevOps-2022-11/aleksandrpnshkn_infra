@@ -15,6 +15,9 @@ echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongod
 
 echo 'Обновим индекс доступных пакетов и установим нужный пакет...'
 sudo apt-get update
+# Фикс ошибки с установкой из https-репозитория
+# E: The method driver /usr/lib/apt/methods/https could not be found.
+sudo apt-get install -y apt-transport-https ca-certificates
 sudo apt-get install -y mongodb-org
 
 echo 'Запускаем MongoDB...'
