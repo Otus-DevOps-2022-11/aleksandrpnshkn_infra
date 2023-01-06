@@ -22,9 +22,12 @@ echo 'Обновим индекс доступных пакетов и уста�
 sudo apt-get update
 sudo apt-get install -y mongodb-org
 
-echo 'Запускаем MongoDB...'
-sudo systemctl start mongod
-echo 'Добавляем в автозапуск...'
-sudo systemctl enable mongod
+# Кажется в тестах скрипт запускается в docker-контейнере, и systemd там нету :\
+if [[ -e /usr/bin/systemctl ]]; then
+    echo 'Запускаем MongoDB...'
+    sudo systemctl start mongod
+    echo 'Добавляем в автозапуск...'
+    sudo systemctl enable mongod
+fi
 
 echo 'Готово'
