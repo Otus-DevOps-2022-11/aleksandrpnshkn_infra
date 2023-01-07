@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# НЕ Прерывать скрипт при ошибке, потому что в Actions будет для тестов использоваться docker, в котором нет systemd
-set +e
+# Прерывать скрипт при ошибке
+set -e
 
 # Прерывать если не передана переменная
 set -u
@@ -22,19 +22,9 @@ echo 'Обновим индекс доступных пакетов и уста�
 sudo apt-get update
 sudo apt-get install -y mongodb-org
 
-# Кажется в тестах скрипт запускается в docker-контейнере, и systemd там нету :\
-if [[ -e /usr/bin/systemctl ]]; then
-    echo 'Запускаем MongoDB...'
-    sudo systemctl start mongod
-    echo 'Добавляем в автозапуск...'
-    sudo systemctl enable mongod
-else
-    echo 'systemd не используется. Запустить через init.d...'
-
-    wget https://raw.githubusercontent.com/mongodb/mongo/v4.2/debian/init.d
-    mv init.d /etc/init.d/mongo.sh
-    chmod 755 /etc/init.d/mongo.sh
-    /etc/init.d/mongo.sh start
-fi
+echo 'Запускаем MongoDB...'
+sudo systemctl start mongod
+echo 'Добавляем в автозапуск...'
+sudo systemctl enable mongod
 
 echo 'Готово'
