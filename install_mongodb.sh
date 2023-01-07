@@ -29,8 +29,12 @@ if [[ -e /usr/bin/systemctl ]]; then
     echo 'Добавляем в автозапуск...'
     sudo systemctl enable mongod
 else
-    echo 'systemd не используется. Запускаем MongoDB вручную...'
-    /usr/bin/mongod --fork --config /etc/mongod.conf
+    echo 'systemd не используется. Запустить через init.d...'
+
+    wget https://raw.githubusercontent.com/mongodb/mongo/v4.2/debian/init.d
+    mv init.d /etc/init.d/mongo.sh
+    chmod 755 /etc/init.d/mongo.sh
+    /etc/init.d/mongo.sh start
 fi
 
 echo 'Готово'
