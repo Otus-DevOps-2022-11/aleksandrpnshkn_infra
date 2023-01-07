@@ -23,6 +23,7 @@ someinternalhost_IP = 10.128.0.15
 
 ## reddit-app
 ### Создание инстанса
+В корне репозитория:
 ```bash
 yc compute instance create \
   --name reddit-app \
@@ -37,6 +38,6 @@ yc compute instance create \
 
 ### Доступы
 ```
-testapp_IP = 51.250.13.248
+testapp_IP = 51.250.88.11
 testapp_port = 9292
 ```
