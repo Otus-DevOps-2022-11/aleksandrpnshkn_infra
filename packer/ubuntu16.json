@@ -1,9 +1,4 @@
 {
-  "variables": {
-    "yc_folder_id": "b1g4hnccu07ejt6s93hj",
-    "yc_key_path": "/mnt/files/web/otus/aleksandrpnshkn_infra/packer/key.json",
-    "source_image_family": "ubuntu-1604-lts"
-  },
   "builders": [
     {
       "type": "yandex",
@@ -15,18 +10,18 @@
       "ssh_username": "ubuntu",
       "platform_id": "standard-v1",
       "use_ipv4_nat": true,
-      "subnet_id": "e9bk0a7bqnvh9e3ji47m"
+      "subnet_id": "{{user `yc_subnet_id`}}"
     }
   ],
   "provisioners": [
     {
       "type": "shell",
-      "script": "scripts/install_ruby.sh",
+      "script": "scripts/install_mongodb.sh",
       "execute_command": "sudo {{.Path}}"
     },
     {
       "type": "shell",
-      "script": "scripts/install_mongodb.sh",
+      "script": "scripts/install_ruby.sh",
       "execute_command": "sudo {{.Path}}"
     }
   ]
