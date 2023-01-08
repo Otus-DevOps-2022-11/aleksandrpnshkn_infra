@@ -1,6 +1,7 @@
 {
   "yc_folder_id": "qwerty",
   "yc_subnet_id": "qwerty",
+  "yc_source_image_folder_id": "qwerty",
   "yc_key_path": "/mnt/files/example/packer/key.json",
   "source_image_family": "ubuntu-1604-lts"
 }
