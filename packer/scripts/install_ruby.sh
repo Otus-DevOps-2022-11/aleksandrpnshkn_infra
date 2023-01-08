@@ -13,6 +13,6 @@ echo 'Обновить apt, предварительно убедившись ч
 flock /var/lib/apt/daily_lock apt-get update
 
 echo 'Обновляем APT и устанавливаем Ruby и Bundler...'
-sudo apt-get install -y ruby-full ruby-bundler build-essential
+flock /var/lib/apt/daily_lock apt-get install -y ruby-full ruby-bundler build-essential
 
 echo 'Готово'
