@@ -1,0 +1,24 @@
+{
+  "builders": [
+    {
+      "type": "yandex",
+      "service_account_key_file": "{{user `yc_key_path`}}",
+      "folder_id": "{{user `yc_folder_id`}}",
+      "source_image_family": "reddit-base",
+      "source_image_folder_id": "{{user `yc_source_image_folder_id`}}",
+      "image_name": "reddit-full-{{timestamp}}",
+      "image_family": "reddit-full",
+      "ssh_username": "ubuntu",
+      "platform_id": "standard-v1",
+      "use_ipv4_nat": true,
+      "subnet_id": "{{user `yc_subnet_id`}}"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "script": "scripts/deploy.sh",
+      "execute_command": "sudo {{.Path}}"
+    }
+  ]
+}
