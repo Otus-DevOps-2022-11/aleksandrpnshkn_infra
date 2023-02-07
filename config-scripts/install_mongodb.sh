@@ -9,6 +9,9 @@ set -u
 # Показывать команды
 set -x
 
+echo 'Подождать пока systemd закончит автоматические обновления apt...'
+flock /var/lib/apt/daily_lock
+
 # Фикс ошибки с установкой из https-репозитория
 # E: The method driver /usr/lib/apt/methods/https could not be found.
 sudo apt-get update
