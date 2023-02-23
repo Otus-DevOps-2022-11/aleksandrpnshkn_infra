@@ -67,3 +67,13 @@ cd ..
 # Создать прерываемую ВМ на базе образа reddit-full
 ./config-scripts/create-reddit-vm.sh
 ```
+
+## terraform
+В terraform создается `count` виртуалок, к которым есть доступ через балансировщик нагрузки.
+```bash
+# запустить terraform нужной версии
+docker run --entrypoint "/bin/sh" --rm -it --volume "${PWD}:/app" --volume "${HOME}/.ssh:/root/.ssh" --workdir /app/terraform hashicorp/terraform:0.12.31
+
+# внутри контейнера выполнять нужные команды
+terraform plan
+```
