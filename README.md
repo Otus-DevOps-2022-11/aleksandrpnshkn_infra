@@ -74,6 +74,9 @@ cd ..
 # запустить terraform нужной версии
 docker run --entrypoint "/bin/sh" --rm -it --volume "${PWD}:/app" --volume "${HOME}/.ssh:/root/.ssh" --workdir /app/terraform hashicorp/terraform:0.12.31
 
+# внутри контейнера перейти в нужное окружение
+cd prod
+
 # внутри контейнера выполнять нужные команды
 terraform plan
 ```
