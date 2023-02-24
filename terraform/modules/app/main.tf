@@ -1,8 +1,9 @@
-resource "yandex_compute_instance" "db" {
-  name  = "reddit-db"
+resource "yandex_compute_instance" "app" {
+  name  = format("reddit-app-%d", count.index)
+  count = var.app_vms_count
 
   labels = {
-    tags = "reddit-db"
+    tags = "reddit-app"
   }
 
   resources {
@@ -12,12 +13,12 @@ resource "yandex_compute_instance" "db" {
 
   boot_disk {
     initialize_params {
-      image_id = var.db_disk_image
+      image_id = var.app_disk_image
     }
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.app-subnet.id
+    subnet_id = var.subnet_id
     nat       = true
   }
 
