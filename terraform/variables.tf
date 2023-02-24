@@ -1,4 +1,5 @@
 variable app_vms_count {
+  type    = number
   default = 1
 }
 variable cloud_id {
