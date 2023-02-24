@@ -70,6 +70,7 @@ cd ..
 
 ## terraform
 В terraform создается `count` виртуалок, к которым есть доступ через балансировщик нагрузки.
+В качестве backend для стейта используется yandex storage. Блокировка (lock) стейта не реализована.
 ```bash
 # запустить terraform нужной версии
 docker run --entrypoint "/bin/sh" --rm -it --volume "${PWD}:/app" --volume "${HOME}/.ssh:/root/.ssh" --workdir /app/terraform hashicorp/terraform:0.12.31
@@ -77,6 +78,7 @@ docker run --entrypoint "/bin/sh" --rm -it --volume "${PWD}:/app" --volume "${HO
 # внутри контейнера перейти в нужное окружение
 cd prod
 
-# внутри контейнера выполнять нужные команды
-terraform plan
+# Внутри контейнера выполнять нужные команды.
+# Т.к. backend не разрешает использовать tfvars-переменные, то прокидывать s3-токены через обычные переменные окружения.
+AWS_ACCESS_KEY_ID=qwerty AWS_SECRET_ACCESS_KEY=qwerty terraform init
 ```
