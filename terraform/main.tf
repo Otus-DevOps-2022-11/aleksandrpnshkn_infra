@@ -5,6 +5,17 @@ provider "yandex" {
   zone      = var.zone
 }
 
+resource "yandex_vpc_network" "app-network" {
+  name = "reddit-app-network"
+}
+
+resource "yandex_vpc_subnet" "app-subnet" {
+  name           = "reddit-app-subnet"
+  zone           = var.zone
+  network_id     = yandex_vpc_network.app-network.id
+  v4_cidr_blocks = ["192.168.10.0/24"]
+}
+
 resource "yandex_compute_instance" "app" {
   name  = format("reddit-app-%d", count.index)
   count = var.app_vms_count
@@ -22,7 +33,7 @@ resource "yandex_compute_instance" "app" {
   }
 
   network_interface {
-    subnet_id = var.subnet_id
+    subnet_id = yandex_vpc_subnet.app-subnet.id
     nat       = true
   }
 
