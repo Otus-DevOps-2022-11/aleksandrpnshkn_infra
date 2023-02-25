@@ -75,6 +75,10 @@ cd ..
 # запустить terraform нужной версии
 docker run --entrypoint "/bin/sh" --rm -it --volume "${PWD}:/app" --volume "${HOME}/.ssh:/root/.ssh" --workdir /app/terraform hashicorp/terraform:0.12.31
 
+# Создать бакет для хранения state-файлов. В output будет ключ для дальнейшей работы с terraform
+terraform init
+terraform apply
+
 # внутри контейнера перейти в нужное окружение
 cd prod
 
