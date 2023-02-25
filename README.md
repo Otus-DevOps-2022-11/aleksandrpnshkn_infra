@@ -73,17 +73,20 @@ cd ..
 В качестве backend для стейта используется yandex storage. Блокировка (lock) стейта не реализована.
 БД и app разделены на разные виртуалки. БД доступна всем из интернета, это сделано для простоты соединения с сервером по ssh, в реальном окружении БД будет во внутренней сети.
 ```bash
-# запустить terraform нужной версии
+# (Опционально) запустить terraform нужной версии, прокинув туда .ssh для связи с yandex cloud. Контейнер удалится сам после exit
 docker run --entrypoint "/bin/sh" --rm -it --volume "${PWD}:/app" --volume "${HOME}/.ssh:/root/.ssh" --workdir /app/terraform hashicorp/terraform:0.12.31
 
-# Создать бакет для хранения state-файлов. В output будет ключ для дальнейшей работы с terraform
+# Создать бакет для хранения состояний
 terraform init
 terraform apply
 
-# внутри контейнера перейти в нужное окружение
-cd prod
+# Достать токены из output и использовать их в переменных для доступа к созданному бакету в дальнейшей работе
+export AWS_ACCESS_KEY_ID=`terraform output bucket_access_key`
+export AWS_SECRET_ACCESS_KEY=`terraform output bucket_secret_key`
 
-# Внутри контейнера выполнять нужные команды.
-# Т.к. backend не разрешает использовать tfvars-переменные, то прокидывать s3-токены через обычные переменные окружения.
-AWS_ACCESS_KEY_ID=qwerty AWS_SECRET_ACCESS_KEY=qwerty terraform init
+# Задеплоить приложение
+cd prod
+terraform init
+terraform apply
 ```
+Приложение доступно по адресу external_ip_address_app на порту 9292
