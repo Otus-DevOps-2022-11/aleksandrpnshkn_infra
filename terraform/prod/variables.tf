@@ -21,9 +21,6 @@ variable public_key_path {
 variable private_key_path {
   default = "~/.ssh/yc"
 }
-variable image_id {
-  description = "Disk image"
-}
 variable app_disk_image {
   description = "Disk image for reddit app"
   default     = "reddit-app-base"
@@ -31,12 +28,6 @@ variable app_disk_image {
 variable db_disk_image {
   description = "Disk image for reddit db"
   default     = "reddit-db-base"
-}
-variable network_id {
-  description = "Network"
-}
-variable subnet_id {
-  description = "Subnet"
 }
 variable token {
   description = "key .json"
