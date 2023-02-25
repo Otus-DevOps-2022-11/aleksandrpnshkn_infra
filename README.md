@@ -71,6 +71,7 @@ cd ..
 ## terraform
 В terraform создается `count` виртуалок, к которым есть доступ через балансировщик нагрузки.
 В качестве backend для стейта используется yandex storage. Блокировка (lock) стейта не реализована.
+БД и app разделены на разные виртуалки. БД доступна всем из интернета, это сделано для простоты соединения с сервером по ssh, в реальном окружении БД будет во внутренней сети.
 ```bash
 # запустить terraform нужной версии
 docker run --entrypoint "/bin/sh" --rm -it --volume "${PWD}:/app" --volume "${HOME}/.ssh:/root/.ssh" --workdir /app/terraform hashicorp/terraform:0.12.31
