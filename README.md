@@ -98,5 +98,9 @@ cd ansible
 # Установить зависимости
 pip install -r requirements.txt
 
-#
+# Склонировать репозиторий на app-сервер
+ansible-playbook clone.yml
+
+# Выполнить произвольную команду на сервере
+ansible app -m command -a 'ls -alh /home/ubuntu/reddit'
 ```
