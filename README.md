@@ -98,6 +98,9 @@ cd ansible
 # Установить зависимости
 pip install -r requirements.txt
 
+# Проверить доступность серверов
+ansible all -m ping
+
 # Склонировать репозиторий на app-сервер
 ansible-playbook clone.yml
 
