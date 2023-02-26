@@ -1,3 +1,8 @@
+data "yandex_compute_image" "app-image" {
+  family = var.app_disk_image
+  folder_id = var.folder_id
+}
+
 resource "yandex_compute_instance" "app" {
   name  = format("reddit-app-%d", count.index)
   count = var.app_vms_count
@@ -13,7 +18,7 @@ resource "yandex_compute_instance" "app" {
 
   boot_disk {
     initialize_params {
-      image_id = var.app_disk_image
+      image_id = data.yandex_compute_image.app-image.id
     }
   }
 
