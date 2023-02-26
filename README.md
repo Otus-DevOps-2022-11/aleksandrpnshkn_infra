@@ -90,3 +90,13 @@ terraform init
 terraform apply
 ```
 Приложение доступно по адресу external_ip_address_app на порту 9292
+
+## ansible
+```bash
+cd ansible
+
+# Установить зависимости
+pip install -r requirements.txt
+
+#
+```
