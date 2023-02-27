@@ -10,3 +10,6 @@ variable db_disk_image {
 variable subnet_id {
   description = "Subnet"
 }
+variable folder_id {
+  description = "Folder"
+}

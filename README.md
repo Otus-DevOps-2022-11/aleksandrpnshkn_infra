@@ -90,3 +90,27 @@ terraform init
 terraform apply
 ```
 Приложение доступно по адресу external_ip_address_app на порту 9292
+
+## ansible
+```bash
+cd ansible
+
+# Установить зависимости
+pip install -r requirements.txt
+
+# Проверить доступность серверов
+ansible all -m ping
+
+# Склонировать репозиторий на app-сервер
+ansible-playbook clone.yml
+
+# Выполнить произвольную команду на сервере
+ansible app -m command -a 'ls -alh /home/ubuntu/reddit'
+```
+### Динамический inventory
+JSON для динамического инвентаря отличается от JSON для статического.
+У статического инвентаря структура похожа на yml-файл, а [в динамическом другие требования](https://docs.ansible.com/ansible/latest/dev_guide/developing_inventory.html#tuning-the-external-inventory-script).
+
+Динамический инвентарь генерируется python-скриптом.
+Справку по аргументам можно получить через `./yc-inventory.py --help`.
+В данный момент IP серверов захардкожены в переменной внутри скрипта.

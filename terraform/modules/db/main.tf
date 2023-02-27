@@ -1,3 +1,8 @@
+data "yandex_compute_image" "db-image" {
+  family = var.db_disk_image
+  folder_id = var.folder_id
+}
+
 resource "yandex_compute_instance" "db" {
   name  = "reddit-db"
 
@@ -12,7 +17,7 @@ resource "yandex_compute_instance" "db" {
 
   boot_disk {
     initialize_params {
-      image_id = var.db_disk_image
+      image_id = data.yandex_compute_image.db-image.id
     }
   }
 

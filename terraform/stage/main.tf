@@ -7,7 +7,7 @@ provider "yandex" {
 
 module "vpc" {
   source = "./../modules/vpc"
-  zone = var.zone
+  zone   = var.zone
 }
 
 module "app" {
@@ -16,6 +16,7 @@ module "app" {
   app_disk_image  = var.app_disk_image
   subnet_id       = module.vpc.subnet_id
   database_url    = module.db.external_ip_address_db
+  folder_id       = var.folder_id
 }
 
 module "db" {
@@ -23,4 +24,5 @@ module "db" {
   public_key_path = var.public_key_path
   db_disk_image   = var.db_disk_image
   subnet_id       = module.vpc.subnet_id
+  folder_id       = var.folder_id
 }

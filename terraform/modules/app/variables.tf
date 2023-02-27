@@ -20,3 +20,6 @@ variable subnet_id {
 variable "database_url" {
   description = "DB for reddit app"
 }
+variable folder_id {
+  description = "Folder"
+}
