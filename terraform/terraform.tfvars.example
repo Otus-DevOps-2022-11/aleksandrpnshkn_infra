@@ -1,0 +1,8 @@
+app_vms_count = 1
+subnet_id     = "qwerty"
+network_id    = "qwerty"
+image_id      = "qwerty"
+token         = "qwerty"
+cloud_id      = "qwerty"
+folder_id     = "qwerty"
+zone          = "ru-central1-a"
