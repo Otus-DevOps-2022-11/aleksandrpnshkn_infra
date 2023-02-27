@@ -70,10 +70,23 @@ cd ..
 
 ## terraform
 В terraform создается `count` виртуалок, к которым есть доступ через балансировщик нагрузки.
+В качестве backend для стейта используется yandex storage. Блокировка (lock) стейта не реализована.
+БД и app разделены на разные виртуалки. БД доступна всем из интернета, это сделано для простоты соединения с сервером по ssh, в реальном окружении БД будет во внутренней сети.
 ```bash
-# запустить terraform нужной версии
+# (Опционально) запустить terraform нужной версии, прокинув туда .ssh для связи с yandex cloud. Контейнер удалится сам после exit
 docker run --entrypoint "/bin/sh" --rm -it --volume "${PWD}:/app" --volume "${HOME}/.ssh:/root/.ssh" --workdir /app/terraform hashicorp/terraform:0.12.31
 
-# внутри контейнера выполнять нужные команды
-terraform plan
+# Создать бакет для хранения состояний
+terraform init
+terraform apply
+
+# Достать токены из output и использовать их в переменных для доступа к созданному бакету в дальнейшей работе
+export AWS_ACCESS_KEY_ID=`terraform output bucket_access_key`
+export AWS_SECRET_ACCESS_KEY=`terraform output bucket_secret_key`
+
+# Задеплоить приложение
+cd prod
+terraform init
+terraform apply
 ```
+Приложение доступно по адресу external_ip_address_app на порту 9292

@@ -1,0 +1,5 @@
+app_vms_count = 1
+token         = "qwerty"
+cloud_id      = "qwerty"
+folder_id     = "qwerty"
+zone          = "ru-central1-a"
