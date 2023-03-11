@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     region   = "ru-central1"
-    bucket   = "tf-state-bucket-bucket"
+    bucket   = "reddit-app-terraform-backend"
     endpoint = "storage.yandexcloud.net"
     key      = "stage.tfstate"
     # Фикс ошибки: Error: Invalid AWS Region: ru-central1
