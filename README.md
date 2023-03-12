@@ -104,6 +104,10 @@ pip install -r requirements.txt
 # Проверить доступность серверов
 ansible all -m ping
 
+# dry-run плейбука
+ansible-playbook reddit_app.yml --check --limit app
+ansible-playbook reddit_app.yml --check --limit db
+
 # Склонировать репозиторий на app-сервер
 ansible-playbook clone.yml
 
