@@ -20,7 +20,7 @@
         name: mongod
         state: restarted
 
-- name: Configure hosts and deploy application
+- name: Configure hosts
   hosts: app
   tags: app
   vars:
@@ -52,7 +52,7 @@
         state: restarted
         daemon_reload: yes
 
-- name: Configure hosts and deploy application
+- name: Deploy application
   hosts: app
   tags: deploy
   tasks:
