@@ -58,9 +58,12 @@ packer build -var-file=./variables.json ./ubuntu16.json
 # Создать полный образ reddit-full с установленным и запущенным приложением
 packer build -var-file=./variables.json ./immutable.json
 
-# Создать раздельные образы app и db
-packer build -var-file=./variables.json ./app.json
-packer build -var-file=./variables.json ./db.json
+# Вернуться в корень
+cd ..
+
+# Создать раздельные образы app и db (ИЗ КОРНЯ)
+packer build -var-file=./packer/variables.json ./packer/app.json
+packer build -var-file=./packer/variables.json ./packer/db.json
 ```
 
 Перед созданием ВМ нужно указать путь к своему ssh-ключу в скрипте `config-scripts/create-reddit-vm.sh`.
