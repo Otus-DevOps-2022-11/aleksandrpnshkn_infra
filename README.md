@@ -105,8 +105,8 @@ pip install -r requirements.txt
 ansible all -m ping
 
 # dry-run плейбука
-ansible-playbook reddit_app.yml --check --limit app
-ansible-playbook reddit_app.yml --check --limit db
+ansible-playbook reddit_app.yml --limit app --tags app --check
+ansible-playbook reddit_app.yml --limit db --tags db --check
 
 # Склонировать репозиторий на app-сервер
 ansible-playbook clone.yml

@@ -3,8 +3,35 @@
   hosts: all
   vars:
     mongo_bind_ip: 0.0.0.0
-    db_host: 192.168.10.19
+    db_host: 158.160.61.246
   tasks:
+    - name: Install dependencies
+      become: true
+      apt:
+        name: git
+        state: present
+        update_cache: true
+      tags:
+        - app
+        - deploy
+
+    - name: Fetch the latest version of application code
+      git:
+        repo: 'https://github.com/express42/reddit.git'
+        dest: /home/ubuntu/reddit
+        version: monolith
+      tags:
+        - app
+        - deploy
+
+    - name: Bundle install
+      bundler:
+        state: present
+        chdir: /home/ubuntu/reddit
+      tags:
+        - app
+        - deploy
+
     - name: Change mongo config file
       become: true
       template:
@@ -51,3 +78,4 @@
       systemd:
         name: puma
         state: restarted
+        daemon_reload: yes
