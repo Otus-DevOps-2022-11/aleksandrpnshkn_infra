@@ -1,0 +1,12 @@
+---
+- name: Configure host
+  hosts: all
+  tasks:
+    - name: Install app dependencies
+      become: true
+      apt:
+        pkg:
+          - ruby-full
+          - ruby-bundler
+          - build-essential
+        update_cache: true
