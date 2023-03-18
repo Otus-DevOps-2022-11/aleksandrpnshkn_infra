@@ -104,15 +104,15 @@ pip install -r requirements.txt
 # Проверить доступность серверов
 ansible all -m ping
 
-# dry-run плейбука
-ansible-playbook reddit_app.yml --limit app --tags app --check
-ansible-playbook reddit_app.yml --limit db --tags db --check
-
-# Склонировать репозиторий на app-сервер
-ansible-playbook clone.yml
+# dry-run "всё-в-одном" плейбука
+ansible-playbook reddit_app_one_play.yml --limit app --tags app --check
+ansible-playbook reddit_app_one_play.yml --limit db --tags db --check
 
 # Выполнить произвольную команду на сервере
 ansible app -m command -a 'ls -alh /home/ubuntu/reddit'
+
+# Настроить app/db хосты и поднять приложение
+ansible-playbook site.yml
 ```
 ### Динамический inventory
 JSON для динамического инвентаря отличается от JSON для статического.
