@@ -117,7 +117,7 @@ ansible-playbook reddit_app_one_play.yml --limit db --tags db --check
 ansible app -m command -a 'ls -alh /home/ubuntu/reddit'
 
 # Настроить app/db хосты и поднять приложение
-ansible-playbook site.yml
+ansible-playbook -i environments/stage/inventory site.yml
 ```
 ### Динамический inventory
 JSON для динамического инвентаря отличается от JSON для статического.
@@ -134,5 +134,5 @@ JSON для динамического инвентаря отличается �
 - Донастроить сервера и задеплоить приложение с помощью:
 ```bash
 cd ansible
-ansible-playbook site.yml
+ansible-playbook -i environments/stage/inventory site.yml
 ```
