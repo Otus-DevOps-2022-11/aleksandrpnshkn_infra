@@ -1,7 +1,5 @@
 ---
 - name: Configure application
   hosts: app
-  vars:
-    db_host: 158.160.60.42
   roles:
     - app
