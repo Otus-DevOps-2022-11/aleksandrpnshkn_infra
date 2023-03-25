@@ -130,9 +130,14 @@ JSON для динамического инвентаря отличается �
 ## Как запустить проект
 - Создать базовые образы в packer (см. README)
 - Создать серверы в terraform (см. README)
-- Скопировать IP из вывода terraform в `ansible/inventory.yml` и IP базы в переменную `db_host` в плейбуке `ansible/app.yml`.
+- Скопировать IP из вывода terraform в `ansible/environments/stage/inventory`
+- Скопировать IP базы в переменную `db_host` в `ansible/environments/stage/group_vars/app`
 - Донастроить сервера и задеплоить приложение с помощью:
 ```bash
 cd ansible
-ansible-playbook -i environments/stage/inventory site.yml
+
+# Установить зависимости
+ansible-galaxy install -r environments/prod/requirements.yml
+
+ansible-playbook -i environments/prod/inventory playbooks/site.yml
 ```
