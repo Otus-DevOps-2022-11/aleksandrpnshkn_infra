@@ -1,0 +1,40 @@
+---
+- name: Configure MongoDB
+  hosts: all
+  tasks:
+    # Фикс ошибки с установкой из https-репозитория
+    # E: The method driver /usr/lib/apt/methods/https could not be found.
+    - name: Install https-driver
+      become: true
+      apt:
+        pkg:
+          - ca-certificates
+          - apt-transport-https
+        update_cache: true
+
+    - name: Add apt-key for mongodb
+      become: true
+      apt_key:
+        url: https://www.mongodb.org/static/pgp/server-4.2.asc
+        state: present
+
+    - name: Add mongodb apt-repository
+      become: true
+      apt_repository:
+        repo: 'deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/4.2 multiverse'
+        state: present
+        filename: mongodb-org-4.2
+
+    - name: Install mongodb
+      become: true
+      apt:
+        name: mongodb-org
+        state: present
+        update_cache: true
+
+    - name: Start mongod
+      become: true
+      service:
+        name: mongod
+        state: started
+        enabled: yes
