@@ -1,6 +1,0 @@
-all:
-  hosts:
-    app:
-      ansible_host: 51.250.79.191
-    db:
-      ansible_host: 51.250.80.216

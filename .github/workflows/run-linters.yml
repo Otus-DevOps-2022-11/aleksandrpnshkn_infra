@@ -1,0 +1,38 @@
+name: Run linters
+
+on:
+  push:
+    branches-ignore: main
+  pull_request:
+    branches-ignore: main
+
+jobs:
+  ansible_lint:
+    name: Ansible Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      # Important: This sets up your GITHUB_WORKSPACE environment variable
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # needed for progressive mode to work
+
+      - name: Run ansible-lint
+        # replace `main` with any valid ref, or tags like `v6`
+        uses: ansible/ansible-lint-action@main
+
+  packer_validate_app:
+    runs-on: hashicorp/packer:1.6.4
+    steps:
+      - name: Packer validate app
+        uses: dawitnida/packer-github-actions/validate@master
+        env:
+          TEMPLATE_FILE_NAME: packer/app.json
+
+  packer_validate_db:
+    runs-on: hashicorp/packer:1.6.4
+    steps:
+      - name: Packer validate DB
+        uses: dawitnida/packer-github-actions/validate@master
+        env:
+          TEMPLATE_FILE_NAME: packer/db.json

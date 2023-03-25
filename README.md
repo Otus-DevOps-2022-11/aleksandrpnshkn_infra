@@ -117,7 +117,7 @@ ansible-playbook reddit_app_one_play.yml --limit db --tags db --check
 ansible app -m command -a 'ls -alh /home/ubuntu/reddit'
 
 # Настроить app/db хосты и поднять приложение
-ansible-playbook site.yml
+ansible-playbook -i environments/stage/inventory site.yml
 ```
 ### Динамический inventory
 JSON для динамического инвентаря отличается от JSON для статического.
@@ -130,9 +130,15 @@ JSON для динамического инвентаря отличается �
 ## Как запустить проект
 - Создать базовые образы в packer (см. README)
 - Создать серверы в terraform (см. README)
-- Скопировать IP из вывода terraform в `ansible/inventory.yml` и IP базы в переменную `db_host` в плейбуке `ansible/app.yml`.
+- Скопировать IP из вывода terraform в `ansible/environments/stage/inventory`
+- Скопировать IP базы в переменную `db_host` в `ansible/environments/stage/group_vars/app`
+- Ввести ключ шифрования в файл `ansible/vault.key` для расшифровки файлов
 - Донастроить сервера и задеплоить приложение с помощью:
 ```bash
 cd ansible
-ansible-playbook site.yml
+
+# Установить зависимости
+ansible-galaxy install -r environments/prod/requirements.yml
+
+ansible-playbook -i environments/prod/inventory playbooks/site.yml
 ```
