@@ -22,7 +22,7 @@ jobs:
         uses: ansible/ansible-lint-action@main
 
   packer_validate_app:
-    runs-on: hashicorp/packer:1.8.5
+    runs-on: hashicorp/packer:1.6.4
     steps:
       - name: Packer validate app
         uses: dawitnida/packer-github-actions/validate@master
@@ -30,7 +30,7 @@ jobs:
           TEMPLATE_FILE_NAME: packer/app.json
 
   packer_validate_db:
-    runs-on: hashicorp/packer:1.8.5
+    runs-on: hashicorp/packer:1.6.4
     steps:
       - name: Packer validate DB
         uses: dawitnida/packer-github-actions/validate@master
