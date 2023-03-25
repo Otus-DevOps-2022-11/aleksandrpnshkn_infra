@@ -8,3 +8,4 @@
 
 *.retry
 /ansible/vault.key
+/ansible/roles/jdauphant.nginx/
